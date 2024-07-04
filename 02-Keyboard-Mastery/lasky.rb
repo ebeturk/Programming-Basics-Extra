@@ -14,10 +14,11 @@
 # It will free you from the reliance on a mouse and, to some extent, the touchpad.
 # Please follow the instructions carefully and perform the tasks as requested.
 
-# TODO: 1: Click 'here'. Then press Down Arrow three times.
+# TODO: 1: Click 'here' once. Then press Down Arrow twice.
+puts 'The end of the line, where all things conclude!'
+
 # Then go to the end of the line. (macOS: Cmd + Right Arrow, Windows/Linux: End)
 # Next, go to the beginning of the line. (macOS: Cmd + Left Arrow, Windows/Linux: Home)
-puts 'The end of the line, where all things conclude!'
 
 # TODO: 3: Copy and paste the next line WITHOUT SELECTING IT. Go anywhere on the line, then copy. (macOS: Cmd + C, Windows/Linux: Ctrl + C)
 puts 'I am a line ready to be cloned!'
@@ -28,19 +29,18 @@ puts 'Snip, snip! This line is ready for a move!'
 # TODO: 5: Delete the next line without selecting it. (macOS/ Windows/Linux: Ctrl + Shift + K)
 puts 'Poof! I am a line destined to vanish!'
 
-# TODO: 6: Move the next line up or down until TODO: 3 and TODO: 8. (macOS and Windows/Linux: Option/Alt + Up/Down Arrow)
+# TODO: 6: Move the next line up or down until 1. TODO: 3 and 2. TODO: 8. (macOS and Windows/Linux: Option/Alt + Up/Down Arrow)
 puts 'I am a traveling line, moving up and down!'
 
 # TODO: 7: Duplicate the following line. (macOS: Cmd + Shift + D, Windows/Linux: Ctrl + Shift + D)
 puts 'Double trouble! Duplicate me!'
 
 # TODO: 7a: Triplicate the following line up and down. (macOS: Option/Alt + Shift + Up and Down, Windows/Linux: Ctrl + Shift + Up and Down)
-puts 'Double trouble! Duplicate me!'
+puts 'Triple trouble! Triplicate me!'
 
-# TODO: 8: Select the word 'Ruby' below, then use multi-select to select the next occurrences,
-# and replace them all with your name. (Select word: double-click; Multi-select: macOS: Cmd + D, Windows/Linux: Ctrl + D)
-# Then use multi-select to select the next occurrence of 'Ruby'.
-# Then edit all occurrences simultaneously. (macOS and Windows/Linux: Cmd/Ctrl + D)
+# TODO: 8: Select the word 'Ruby' below ⬇️, then use multi-select to select the next occurrences,
+# Select word: double-click; Multi-select: macOS: Cmd + D, Windows/Linux: Ctrl + D
+# To replace all occurrences with your name simultaneously: just start typing your name without clicking.
 puts 'Ruby is fantastic!'
 puts 'With Ruby, programming is so much fun!'
 puts 'Ruby shines brightly in the world of code!'
@@ -48,7 +48,8 @@ puts 'Ruby shines brightly in the world of code!'
 # TODO: 9: Comment or uncomment a line of code. (macOS and Windows/Linux: Cmd/Ctrl + /)
 # puts 'Am I visible? Toggle my comments!'
 
-# TODO: 10: Comment out the following lines by first selecting them with Shift and then using the comment shortcut. (macOS and Windows/Linux: Cmd/Ctrl + /)
+# TODO: 10: Comment out the following lines by first selecting them with Shift and then using the comment shortcut.
+# Click anywhere on any line, and then shift⬆ click the other line (macOS and Windows/Linux: Cmd/Ctrl + /)
 puts 'These lines are going undercover!'
 puts 'They will turn into comments, like magic!'
 
