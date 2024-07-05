@@ -8,13 +8,15 @@ puts "Use Ruby methods on the variable 'code' to uncover the clues."
 
 # Initial Data
 code = 'ermEWeaponTimeStudy'
+weapon_array = ["🔪", "🔫", "🏹", "🪓", "⚔️"]
 
 # Helper Function: Ask a Ruby question until the correct answer is given
-def ask_question(question, correct_answer, success_message)
+def ask_question(question, correct_answers, success_message)
   loop do
     puts "\n #{question}"
+    print '> '
     answer = gets.chomp
-    if answer == correct_answer
+    if correct_answers.include?(answer.downcase)
       puts success_message
       break
     else
@@ -23,45 +25,97 @@ def ask_question(question, correct_answer, success_message)
   end
 end
 
+# Helper Function: Evaluate user code safely
+def evaluate_code(user_code, context_binding)
+  begin
+    result = context_binding.eval(user_code)
+    return result
+  rescue StandardError => e
+    puts "That's not the right answer. Your output was: #{e.message}. Try again!"
+    print '> '
+    return nil
+  end
+end
+
 # Murder Hour: Length of the 'code' variable
-ask_question("Riddle 1: What method in Ruby returns the length of a string?", "length", "Correct! Now, apply this method to the 'code' variable to find the hour of the murder.")
-puts "Enter your Ruby code (e.g., variable.size):"
-user_code = gets.chomp
-puts "Hour of the Murder: #{eval(user_code)} o'clock"
+ask_question("Riddle 1: What method in Ruby returns the length of a string?", ["length", "size", "count"], "Correct! Now, apply this method to the 'code' variable to find the hour of the murder.")
+puts "Enter your Ruby code using the correct method on 'code':"
+print '> '
+
+context_binding = binding
+hour = nil
+loop do
+  user_code = gets.chomp
+  hour = evaluate_code(user_code, context_binding)
+  if hour
+    puts "Hour of the Murder: #{hour} o'clock"
+    break
+  end
+end
 
 # Murder Weapon: Last element of an array of emojis
-weapon_array = ["🔪", "🔫", "🏹", "🪓", "⚔️"]
-ask_question("Riddle 2: What method fetches the last element from an array?", "last", "Correct! Use this method on 'weapon_array' to find the murder weapon.")
-puts "Enter your Ruby code (e.g., array_name.first):"
-user_code = gets.chomp
-puts "Murder Weapon: #{eval(user_code)}"
+ask_question("Riddle 2: What method fetches the last element from an array?", ["last"], "Correct! Use this method on 'weapon_array' to find the murder weapon.")
+puts "Enter your Ruby code using the correct method on 'weapon_array':"
+print '> '
+
+weapon = nil
+loop do
+  user_code = gets.chomp
+  weapon = evaluate_code(user_code, context_binding)
+  if weapon
+    puts "Murder Weapon: #{weapon}"
+    break
+  end
+end
 
 # Murderer Name
-ask_question("Riddle 3: What method in Ruby reverses a string?", "reverse", "Correct! Reverse and capitalize the first four characters of 'code' to reveal the murderer's name.")
-puts "Enter your Ruby code (e.g., code[index_range].methoda.methodb):"
-user_code = gets.chomp
-puts "Murderer's Name: #{eval(user_code)}"
+ask_question("Riddle 3: What method in Ruby reverses a string?", ["reverse"], "Correct! Reverse and capitalize the first four characters of 'code' to reveal the murderer's name.")
+puts "Enter your Ruby code to reverse and capitalize the first four characters of 'code':"
+print '> '
+
+murderer = nil
+loop do
+  user_code = gets.chomp
+  murderer = evaluate_code(user_code, context_binding)
+  if murderer && murderer.downcase == "emre"
+    puts "Murderer's Name: #{murderer.capitalize}"
+    break
+  else
+    puts "That's not the correct code. Your output was: #{murderer}. Try again!"
+    print '> '
+  end
+end
 
 # Murder Room
-ask_question("Riddle 4: What Ruby method returns a substring from a string? It starts with an 's'.", "slice", "Correct! Use this method to extract the murder room from 'code' (slice from 14 to 19).")
-puts "Enter your Ruby code (e.g., code.slice(slice_range)):"
-user_code = gets.chomp
-puts "Murder Room: #{eval(user_code)}"
+ask_question("Riddle 4: What Ruby method returns a substring from a string? It starts with an 's'.", ["slice"], "Correct! Use this method to extract the murder room from 'code' (slice from 14 to 19).")
+puts "Enter your Ruby code to extract the murder room from 'code':"
+print '> '
+
+room = nil
+loop do
+  user_code = gets.chomp
+  room = evaluate_code(user_code, context_binding)
+  if room
+    puts "Murder Room: #{room}"
+    break
+  end
+end
 
 # Summary of the Mystery
-hour = eval("code.length")
-weapon = eval("weapon_array.last")
-murderer = eval("code[0..3].reverse")
-room = eval("code.slice(14..19)")
+hour = evaluate_code("code.length", context_binding)
+weapon = evaluate_code("weapon_array.last", context_binding)
+murderer = evaluate_code("code[0..3].reverse.capitalize", context_binding)
+room = evaluate_code("code.slice(14..19)", context_binding)
 
 # Solution String
 solution = "Emre murdered the victim with a ⚔️ in the Study at 19 o'clock"
 
 # Check the Answers and Play Sound if Correct
-puts final_answer = "#{murderer} murdered the victim with a #{weapon} in the #{room} at #{hour} o'clock"
+final_answer = "#{murderer} murdered the victim with a #{weapon} in the #{room} at #{hour} o'clock"
 
 if final_answer == solution
   puts "\nMystery Solved! You've cracked the case!"
+  puts solution  # Print the solution string
 
   # Determine the platform and play the sound file accordingly
   if RUBY_PLATFORM =~ /darwin/  # macOS
